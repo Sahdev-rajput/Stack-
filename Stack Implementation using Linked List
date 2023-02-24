@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+struct Stack
+{
+	int data;
+	struct Stack* next;
+}*top=NULL;
+bool isempty()
+{
+	if (top == NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool isfull() {
+	struct Stack* t = new struct Stack;
+	if (t == NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+void push(int x)
+{
+	struct Stack* t = new struct Stack;
+	if (t == NULL)
+	{
+		cout << "Stack is full" << endl;
+	}
+	else
+	{
+		t->data = x;
+		t->next = top;
+		top = t;
+	}
+}
+int pop()
+{
+	int x = -1;
+	if (top == NULL)
+	{
+		cout << "Stack is empty" << endl;
+	}
+	else
+	{
+		struct Stack* t = top;
+		top = top->next;
+		x = t->data;
+		delete t;
+	}
+	return x;
+}
+void Display()
+{
+	struct Stack* p = top;
+	while (p)
+	{
+		cout << p->data << " ";
+		p = p->next;
+	}
+}
+int peek(int pos)
+{
+	struct Stack* p = top;
+	for (int i = 0; i < pos - 1 && p != NULL; i++)
+	{
+		p = p->next;
+	}
+	if (p == NULL)
+	{
+		cout << "Invalid index" << endl;
+	}
+	else
+	{
+		return p->data;
+
+	}
+	return -1;
+}
+int main()
+{
+	push(10);
+	push(15);
+	push(72);
+	Display();
+	cout << endl;
+	cout << "The value at number 2 is " << peek(2) << endl;
+	cout << "The value at number 8 is " << peek(8) << endl;
+
+}
